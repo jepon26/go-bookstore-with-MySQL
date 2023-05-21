@@ -1,18 +1,19 @@
-package controller
+package controllers
 
 import (
 	"encoding/json"
 	"fmt"
 	"net/http"
 	"strconv"
-	"github.com/ahkil/go-bookstore/pkg/models"
-	"github.com/ahkil/go-bookstore/pkg/utils"
+
+	"github.com/akhil/go-bookstore/pkg/models"
+	"github.com/akhil/go-bookstore/pkg/utils"
 	"github.com/gorilla/mux"
 )
 
 const (
-	contentTypeHeader     = "Content-Type"
-	contentTypeJSON       = "application/json"
+	contentTypeHeader   = "Content-Type"
+	contentTypeJSON     = "application/json"
 	parsingErrorMessage = "error while parsing"
 )
 
@@ -39,9 +40,9 @@ func GetBookById(w http.ResponseWriter, r *http.Request) {
 }
 
 func CreateBook(w http.ResponseWriter, r *http.Request) {
-	CreateBook := models.Book{}
+	CreateBook := &models.Book{}
 	utils.ParseBody(r, CreateBook)
-	b := CreateBook.CreateBook()
+	b:= CreateBook.CreateBook()
 	res, _ := json.Marshal(b)
 	w.WriteHeader(http.StatusOK)
 	w.Write(res)
